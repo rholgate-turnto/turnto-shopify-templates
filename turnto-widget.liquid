@@ -99,11 +99,11 @@
 window.TurnToCmd=window.TurnToCmd||function(){(TurnToCmd.q=TurnToCmd.q||[]).push(arguments)};
 window.TurnToSKUSetup="SKU";
 </script>
-<script src="https://widgets.turnto.com/v5/widgets/Nq7sc6O79rtHxWrsite/js/turnto.js" async></script>
+<script src="https://widgets.turnto.com/v5/widgets/<SITE KEY>/js/turnto.js" async></script>
 <script>
   function loadTeaserCounts(sku) {
    var xhr = new XMLHttpRequest();
-   var ugcCountsUrl = 'https://cdn-ws.turnto.com/v5/sitedata/Nq7sc6O79rtHxWrsite/' + sku + '/d/ugc/counts/' + turnToConfig.locale;
+   var ugcCountsUrl = 'https://cdn-ws.turnto.com/v5/sitedata/<SITE KEY>/' + sku + '/d/ugc/counts/' + turnToConfig.locale;
    xhr.open('GET', ugcCountsUrl, true);
    xhr.addEventListener('load', function() {
      if (xhr.responseText) {
