@@ -1,0 +1,23 @@
+<script>
+  window.addEventListener("load",function(event) {
+    console.log('logged in');
+    var ttSource = getCookie('tt-source');
+    var loggedIn = getCookie('tt-logged-in');
+    var contextObj = getCookie('tt-ctx');
+    if(loggedIn == "false") {
+      $.ajax({
+        url: "https://reviews-app.turnto.com",
+        type: "GET",
+        data: {domain:"{{ shop.permanent_domain }}",id:{{ customer.id }}},
+        dataType:"JSON",
+        success: function(data) {
+          var tokenString = "tt-token=" + data.userDataToken + "; path=/;";
+          document.cookie = "tt-logged-in=true; path=/;";
+          document.cookie = tokenString;
+          document.cookie = "tt-sso-reg=done; path=/;";
+          window.location.replace(ttSource);
+        }
+      })
+    }
+  })
+</script>

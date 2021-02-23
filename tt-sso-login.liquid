@@ -1,0 +1,65 @@
+<div class="tt-sso-messages">
+  <div class="tt-sso-message" id="msgQuestionAnon" style="display: none">
+    <p>
+      Your question has been submitted. Please check back here for answers, or log in or register to have answers emailed to you.
+    </p>
+  </div>
+  <div class="tt-sso-message" id="msgQuestionNonAnon" style="display: none">
+    <p>
+      Please log in or register to complete your submission and have answers emailed to you.
+    </p>
+  </div>
+  <div class="tt-sso-message" id="msgAnswerRegReq" style="display: none">
+    <p>
+      Please log in or register to complete your submission.
+    </p>
+  </div>
+  <div class="tt-sso-message" id="msgReviewNoPurchReq" style="display: none">
+    <p>
+      We need to know who you are before we post your review. Please log in or register.
+    </p>
+  </div>
+  <div class="tt-sso-message" id="msgReviewPurchReq" style="display: none">
+    <p>
+      To ensure authenticity you may only write reviews for items you've purchased. Please log in or register so we can look up your purchases.
+    </p>
+  </div>
+</div>
+<script>
+    window.addEventListener("load",function(event) {
+      var contextObj = getCookie('tt-ctx');
+      if(contextObj != "" && contextObj != null && contextObj != undefined) {
+        var decodedContext = JSON.parse(atob(contextObj));
+        console.log(decodedContext.action, decodedContext.authSetting);
+        if(decodedContext.action == "REVIEW_CREATE") {
+          if(decodedContext.authSetting != "PURCHASE_REQUIRED") {
+            $('.tt-sso-message').hide();
+            $('#msgReviewNoPurchReq').show();
+          } else if(decodedContext.authSetting == "PURCHASE_REQUIRED") {
+            $('.tt-sso-message').hide();
+            $('#msgReviewPurchReq').show();
+          }
+        } else if(decodedContext.action == "QUESTION_CREATE") {
+          if(decodedContext.authSetting == "ANONYMOUS") {
+            $('.tt-sso-message').hide();
+            $('#msgQuestionAnon').show();
+          } else if(decodedContext.authSetting != "ANONYMOUS") {
+            $('.tt-sso-message').hide();
+            $('#msgQuestionNonAnon').show();
+          }
+        } else if(decodedContext.action == "ANSWER_CREATE" || decodedContext.action == "REPLY_CREATE") {
+          if(decodedContext.authSetting == "REGISTRATION_REQUIRED") {
+            $('.tt-sso-message').hide();
+            $('#msgAnswerRegReq').show();
+          }
+        }
+      }
+    })
+</script>
+<style>
+  .tt-sso-message {
+    margin: 20px 0;
+    padding: 5px;
+    border: 1px solid #cdcdcd;
+  }
+</style>
