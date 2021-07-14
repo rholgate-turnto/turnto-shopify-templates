@@ -73,6 +73,8 @@
   {%- assign page_id = "comments-pinboard-teaser-page" -%}
 {%- elsif template contains "vc-pinboard" -%}
   {%- assign page_id = "vc-pinboard-page" -%}
+{%- elseif template contains "landing" -%}
+  {%- assign page_id = "email-landing-page" -%}
 {%- endif -%}
 
 <script>
