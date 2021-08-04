@@ -6,7 +6,7 @@
     var contextObj = getCookie('tt-ctx');
     if(loggedIn == "false") {
       $.ajax({
-        url: "https://reviews-app.turnto.com",
+        url: "https://reviews-app.turnto.com/sso_auth",
         type: "GET",
         data: {domain:"{{ shop.permanent_domain }}",id:{{ customer.id }}},
         dataType:"JSON",
